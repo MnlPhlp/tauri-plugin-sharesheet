@@ -31,15 +31,27 @@ impl<R: Runtime> Sharesheet<R> {
             .run_mobile_plugin("share_text", SharesheetPayload { text, options })
             .map_err(Into::into)
     }
+
+    pub fn share_file(&self, file: String, options: SharesheetOptions) -> crate::Result<()> {
+        self.0
+            .run_mobile_plugin(
+                "share_file",
+                SharesheetPayload {
+                    text: file,
+                    options,
+                },
+            )
+            .map_err(Into::into)
+    }
 }
 
 /// Extensions to [`tauri::App`], [`tauri::AppHandle`], [`tauri::WebviewWindow`], [`tauri::Webview`] and [`tauri::Window`] to access the sharesheet APIs.
 pub trait SharesheetExt<R: Runtime> {
-    fn share_text(&self) -> &Sharesheet<R>;
+    fn share_sheet(&self) -> &Sharesheet<R>;
 }
 
 impl<R: Runtime, T: Manager<R>> crate::SharesheetExt<R> for T {
-    fn share_text(&self) -> &Sharesheet<R> {
+    fn share_sheet(&self) -> &Sharesheet<R> {
         self.state::<Sharesheet<R>>().inner()
     }
 }

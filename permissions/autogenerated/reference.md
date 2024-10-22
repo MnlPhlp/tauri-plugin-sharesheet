@@ -10,8 +10,9 @@ It allows acccess to all sharesheet commands.
 
 
 - `allow-share-text`
+- `allow-share-file`
 
-## Permission Table 
+## Permission Table
 
 <table>
 <tr>
@@ -19,6 +20,32 @@ It allows acccess to all sharesheet commands.
 <th>Description</th>
 </tr>
 
+
+<tr>
+<td>
+
+`sharesheet:allow-share-file`
+
+</td>
+<td>
+
+Enables the share_file command without any pre-configured scope.
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+`sharesheet:deny-share-file`
+
+</td>
+<td>
+
+Denies the share_file command without any pre-configured scope.
+
+</td>
+</tr>
 
 <tr>
 <td>

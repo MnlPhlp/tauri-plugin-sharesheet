@@ -23,6 +23,13 @@ class ShareTextOptions {
     var title: String? = null
 }
 
+@InvokeArg
+class ShareFileOptions {
+    lateinit var file: String
+    var mimeType: String = "text/plain"
+    var title: String? = null
+}
+
 
 @TauriPlugin
 class SharesheetPlugin(private val activity: Activity): Plugin(activity) {
@@ -30,13 +37,29 @@ class SharesheetPlugin(private val activity: Activity): Plugin(activity) {
      * Open the Sharesheet to share some text
      */
     @Command
-    fun shareText(invoke: Invoke) {        
+    fun shareText(invoke: Invoke) {
         val args = invoke.parseArgs(ShareTextOptions::class.java)
 
         val sendIntent = Intent().apply {
             this.action = Intent.ACTION_SEND
             this.type = args.mimeType
             this.putExtra(Intent.EXTRA_TEXT, args.text)
+            this.putExtra(Intent.EXTRA_TITLE, args.title)
+        }
+
+        val shareIntent = Intent.createChooser(sendIntent, null);
+        shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        activity.applicationContext?.startActivity(shareIntent);
+    }
+
+    @Command
+    fun shareFile(invoke: Invoke) {
+        val args = invoke.parseArgs(ShareFileOptions::class.java)
+
+        val sendIntent = Intent().apply {
+            this.action = Intent.ACTION_SEND
+            this.type = args.mimeType
+            this.putExtra(Intent.EXTRA_STREAM, Uri.parse(args.file))
             this.putExtra(Intent.EXTRA_TITLE, args.title)
         }
 

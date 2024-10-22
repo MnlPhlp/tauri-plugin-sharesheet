@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 // SPDX-License-Identifier: MIT
 
-const COMMANDS: &[&str] = &["share_text"];
+const COMMANDS: &[&str] = &["share_text", "share_file"];
 
 fn main() {
     tauri_plugin::Builder::new(COMMANDS)
@@ -14,10 +14,7 @@ fn main() {
     #[cfg(target_os = "macos")]
     {
         tauri_plugin::mobile::update_entitlements(|entitlements| {
-            entitlements.insert(
-                "com.apple.developer.group-session".into(),
-                true.into()
-            );
+            entitlements.insert("com.apple.developer.group-session".into(), true.into());
         })
         .expect("failed to update entitlements");
     }

@@ -12,4 +12,5 @@ It allows acccess to all sharesheet commands.
 
 permissions = [
   "allow-share-text",
+  "allow-share-file"
 ]
