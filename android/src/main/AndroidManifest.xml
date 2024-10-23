@@ -1,3 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application>
+        <!-- Declares a provider which allows us to store files to share in
+            '.../caches/sharesheet' and grant the receiving action access -->
+        <provider
+            android:name="app.tauri.sharesheet.SharesheetFileProvider"
+            android:authorities="${applicationId}.sharesheet.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+    </application>
 </manifest>

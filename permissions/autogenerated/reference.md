@@ -12,7 +12,7 @@ It allows acccess to all sharesheet commands.
 - `allow-share-text`
 - `allow-share-file`
 
-## Permission Table
+## Permission Table 
 
 <table>
 <tr>
